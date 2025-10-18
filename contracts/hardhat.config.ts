@@ -1,7 +1,9 @@
-require('dotenv').config();
-require('@nomicfoundation/hardhat-toolbox');
+import { HardhatUserConfig } from "hardhat/config";
+import "@nomicfoundation/hardhat-toolbox";
+import "dotenv/config";
+import "hardhat-gas-reporter";
 
-module.exports = {
+const config: HardhatUserConfig = {
   solidity: {
     compilers: [
       {
@@ -9,7 +11,7 @@ module.exports = {
         settings: {
           optimizer: {
             enabled: true,
-            runs: 200, // Optimized for production/gas efficiency, useful for hackathon demo
+            runs: 200,
           },
         },
       },
@@ -17,7 +19,7 @@ module.exports = {
   },
   networks: {
     hardhat: {
-      chainId: 31337, // Explicit chain ID for local testing
+      chainId: 31337,
     },
     sepolia: {
       url: `https://eth-sepolia.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}`,
@@ -25,7 +27,9 @@ module.exports = {
     },
   },
   gasReporter: {
-    enabled: true, // Optional: Adds gas usage reports (useful for optimization)
-    currency: 'USD',
+    enabled: true,
+    currency: "USD",
   },
 };
+
+export default config;
